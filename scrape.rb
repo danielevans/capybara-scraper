@@ -4,7 +4,7 @@ require 'json'
 require 'securerandom'
 require './capybara.rb'
 
-target = ENV["target"] || "http://reddit.com/r/funny"
+target = "http://reddit.com/"
 downloaded_images = {}
 
 if File.exist? "downloaded.json"
@@ -14,6 +14,10 @@ end
 include Capybara::DSL
 
 visit target
+
+fill_in "user", :with => "<username>"
+fill_in "passwd", :with => "<password>"
+click_button "login"
 
 new_images = all("a").map { |a| a["href"] || a["src"] }.compact.uniq.select do |url|
   URI.parse(url).path.match(/\.(jpg|png|gif)$/) && !downloaded_images.has_key?(url) rescue false
