@@ -24,4 +24,5 @@
 # Ignore mav temp files
 .DS_Store
 
-/public/uploads
+/downloaded
+/downloaded.json
